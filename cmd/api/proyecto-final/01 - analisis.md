@@ -120,4 +120,4 @@ Esta decisión permite incorporar la nueva funcionalidad conservando la arquitec
 
 Se prioriza la estabilidad del sistema y la reducción del riesgo de regresiones sobre la reutilización máxima de código.
 
-La decisión arquitectónica se documenta formalmente en el [ADR-001](adr.md).
+La decisión arquitectónica se documenta formalmente en el [ADR-001](02%20-%20adr.md).
