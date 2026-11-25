@@ -66,7 +66,7 @@ Como respaldo del proceso de verificación, se adjuntan las evidencias correspon
 
 Las capturas de pantalla y los resultados obtenidos se encuentran organizados en el apartado de evidencias, ubicado al final de la documentación del proyecto.
 
-[Consultar evidencias de verificación](05-evidencias.md)
+[Consultar evidencias de verificación](06-evidencias.md)
 
 
 ## 8. Conclusión
