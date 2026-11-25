@@ -297,6 +297,6 @@ handler.SetupRoutes(
 
 ## 13. Cierre
 
-El informe registra que se ejecutó `docker compose up --build` sin errores. Esta afirmación corresponde al informe y no constituye una nueva comprobación de ejecución. Las evidencias funcionales y de regresión se presentan en la [Fase 4 — Verificación](verificacion.md).
+El informe registra que se ejecutó `docker compose up --build` sin errores. Esta afirmación corresponde al informe y no constituye una nueva comprobación de ejecución. Las evidencias funcionales y de regresión se presentan en la [Fase 4 — Verificación](04%20-%20verificacion.md).
 
 
