@@ -66,8 +66,3 @@ No requerido.
 
 El módulo de préstamos de laptops funciona de manera independiente al módulo de préstamos de libros, compartiendo únicamente la infraestructura y los mecanismos de autenticación y autorización existentes.
 
-## 9. Documentación relacionada
-
-- [Fase 1 — Análisis arquitectónico](01%20-%20analisis.m)
-- [Fase 4 — Verificación](04%20-%20verificacion.md)
-- [Fase 5 — Diagramas](05%20-%20diagramas.md)
