@@ -54,6 +54,90 @@ definitions:
     - title
     - total_copies
     type: object
+  models.Laptop:
+    properties:
+      available_units:
+        type: integer
+      brand:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      model:
+        type: string
+      serial_number:
+        type: string
+      total_units:
+        type: integer
+    type: object
+  models.LaptopLoan:
+    properties:
+      due_at:
+        type: string
+      id:
+        type: integer
+      laptop_id:
+        type: integer
+      loaned_at:
+        type: string
+      returned_at:
+        type: string
+      status:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  models.LaptopLoanDetail:
+    properties:
+      brand:
+        type: string
+      due_at:
+        type: string
+      id:
+        type: integer
+      laptop_id:
+        type: integer
+      loaned_at:
+        type: string
+      model:
+        type: string
+      returned_at:
+        type: string
+      status:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  models.LaptopLoanRequest:
+    properties:
+      laptop_id:
+        example: 1
+        type: integer
+    required:
+    - laptop_id
+    type: object
+  models.LaptopRequest:
+    properties:
+      brand:
+        example: Dell
+        type: string
+      model:
+        example: Latitude 5420
+        type: string
+      serial_number:
+        example: DELL-001
+        type: string
+      total_units:
+        example: 5
+        minimum: 1
+        type: integer
+    required:
+    - brand
+    - model
+    - serial_number
+    - total_units
+    type: object
   models.Loan:
     properties:
       book_id:
@@ -355,6 +439,120 @@ paths:
       summary: Actualizar un libro (solo admin)
       tags:
       - books
+  /laptop-loans:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.LaptopLoanDetail'
+            type: array
+      security:
+      - BearerAuth: []
+      summary: Ver todos los prestamos de laptops
+      tags:
+      - laptop-loans
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID de la laptop
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.LaptopLoanRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.LaptopLoan'
+      security:
+      - BearerAuth: []
+      summary: Solicitar prestamo de laptop
+      tags:
+      - laptop-loans
+  /laptop-loans/{id}/return:
+    put:
+      parameters:
+      - description: ID del prestamo
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Devolver laptop
+      tags:
+      - laptop-loans
+  /laptop-loans/me:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.LaptopLoanDetail'
+            type: array
+      security:
+      - BearerAuth: []
+      summary: Mis prestamos de laptop
+      tags:
+      - laptop-loans
+  /laptops:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Laptop'
+            type: array
+      security:
+      - BearerAuth: []
+      summary: Listar laptops
+      tags:
+      - laptops
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Datos de la laptop
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.LaptopRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Laptop'
+      security:
+      - BearerAuth: []
+      summary: Crear laptop
+      tags:
+      - laptops
   /loans:
     get:
       produces:

@@ -341,6 +341,195 @@ const docTemplate = `{
                 }
             }
         },
+        "/laptop-loans": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "laptop-loans"
+                ],
+                "summary": "Ver todos los prestamos de laptops",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.LaptopLoanDetail"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "laptop-loans"
+                ],
+                "summary": "Solicitar prestamo de laptop",
+                "parameters": [
+                    {
+                        "description": "ID de la laptop",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.LaptopLoanRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.LaptopLoan"
+                        }
+                    }
+                }
+            }
+        },
+        "/laptop-loans/me": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "laptop-loans"
+                ],
+                "summary": "Mis prestamos de laptop",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.LaptopLoanDetail"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/laptop-loans/{id}/return": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "laptop-loans"
+                ],
+                "summary": "Devolver laptop",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID del prestamo",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/laptops": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "laptops"
+                ],
+                "summary": "Listar laptops",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Laptop"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "laptops"
+                ],
+                "summary": "Crear laptop",
+                "parameters": [
+                    {
+                        "description": "Datos de la laptop",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.LaptopRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.Laptop"
+                        }
+                    }
+                }
+            }
+        },
         "/loans": {
             "get": {
                 "security": [
@@ -563,6 +752,130 @@ const docTemplate = `{
                     "type": "integer",
                     "minimum": 1,
                     "example": 3
+                }
+            }
+        },
+        "models.Laptop": {
+            "type": "object",
+            "properties": {
+                "available_units": {
+                    "type": "integer"
+                },
+                "brand": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "serial_number": {
+                    "type": "string"
+                },
+                "total_units": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.LaptopLoan": {
+            "type": "object",
+            "properties": {
+                "due_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "laptop_id": {
+                    "type": "integer"
+                },
+                "loaned_at": {
+                    "type": "string"
+                },
+                "returned_at": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.LaptopLoanDetail": {
+            "type": "object",
+            "properties": {
+                "brand": {
+                    "type": "string"
+                },
+                "due_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "laptop_id": {
+                    "type": "integer"
+                },
+                "loaned_at": {
+                    "type": "string"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "returned_at": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.LaptopLoanRequest": {
+            "type": "object",
+            "required": [
+                "laptop_id"
+            ],
+            "properties": {
+                "laptop_id": {
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "models.LaptopRequest": {
+            "type": "object",
+            "required": [
+                "brand",
+                "model",
+                "serial_number",
+                "total_units"
+            ],
+            "properties": {
+                "brand": {
+                    "type": "string",
+                    "example": "Dell"
+                },
+                "model": {
+                    "type": "string",
+                    "example": "Latitude 5420"
+                },
+                "serial_number": {
+                    "type": "string",
+                    "example": "DELL-001"
+                },
+                "total_units": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "example": 5
                 }
             }
         },
