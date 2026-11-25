@@ -62,7 +62,12 @@ docker compose ps
 
 ## 7. Evidencias
 
-Pendiente de incorporar las capturas y salidas correspondientes a las pruebas ejecutadas.
+Como respaldo del proceso de verificación, se adjuntan las evidencias correspondientes a las pruebas funcionales, las validaciones de las reglas de negocio y las pruebas de regresión realizadas.
+
+Las capturas de pantalla y los resultados obtenidos se encuentran organizados en el apartado de evidencias, ubicado al final de la documentación del proyecto.
+
+[Consultar evidencias de verificación](05-evidencias.md)
+
 
 ## 8. Conclusión
 
