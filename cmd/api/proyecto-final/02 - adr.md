@@ -20,7 +20,7 @@ Se requiere incorporar una funcionalidad que permita gestionar préstamos de lap
 - Generalizar el módulo de préstamos mediante una entidad de recursos.
 - Utilizar una tabla única de préstamos con un tipo de recurso.
 
-Las alternativas se encuentran detalladas en el [análisis arquitectónico](01%20-%20analisis.md).
+Las alternativas se encuentran detalladas en el [Fase 1 — Análisis arquitectónico](01%20-%20analisis.md)
 
 ## 3. Decisión
 
