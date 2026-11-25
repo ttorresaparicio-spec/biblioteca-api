@@ -43,5 +43,5 @@ INSERT INTO books (title, author, isbn, category, cover_url, total_copies, avail
 ('Clean Code', 'Robert C. Martin', '9780132350884', 'Tecnología', '', 2, 2),
 ('El principito', 'Antoine de Saint-Exupéry', '9780156012195', 'Infantil', '', 4, 4),
 ('Sapiens', 'Yuval Noah Harari', '9780062316097', 'Historia', '', 2, 2),
-('The Pragmatic Programmer', 'Andrew Hunt', '9780135957059', 'Tecnología', '', 2, 2);
+('The Pragmatic Programmer', 'Andrew Hunt', '9780135957059', 'Tecnología', '', 2, 2),
 ('The Go Programming Language (Addison-Wesley Professional Computing Series) ', 'Alan Donovan', '', 'Tecnología', '', 2, 2);
