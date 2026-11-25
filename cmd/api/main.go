@@ -17,7 +17,7 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 
-	_ "biblioteca-api/docs" // Documentos generados por swag init
+	_ "biblioteca-api/docs"
 
 	"biblioteca-api/internal/config"
 	"biblioteca-api/internal/db"
@@ -32,24 +32,48 @@ func main() {
 	database := db.Connect(cfg.DSN())
 	defer database.Close()
 
-	// Repositorios
+	// Repositorios existentes.
 	userRepo := repository.NewUserRepository(database)
 	bookRepo := repository.NewBookRepository(database)
 	loanRepo := repository.NewLoanRepository(database)
 
-	// Servicios
-	authService := service.NewAuthService(userRepo, cfg.JWTSecret, cfg.JWTExpHours)
+	// Nuevos repositorios de laptops.
+	laptopRepo := repository.NewLaptopRepository(database)
+	laptopLoanRepo := repository.NewLaptopLoanRepository(database)
+
+	// Servicios existentes.
+	authService := service.NewAuthService(
+		userRepo,
+		cfg.JWTSecret,
+		cfg.JWTExpHours,
+	)
+
 	bookService := service.NewBookService(bookRepo)
 	loanService := service.NewLoanService(loanRepo, bookRepo)
 
-	// Handlers
+	// Nuevos servicios de laptops.
+	laptopService := service.NewLaptopService(laptopRepo)
+
+	laptopLoanService := service.NewLaptopLoanService(
+		laptopLoanRepo,
+		laptopRepo,
+	)
+
+	// Handlers existentes.
 	authHandler := handler.NewAuthHandler(authService)
 	bookHandler := handler.NewBookHandler(bookService)
 	loanHandler := handler.NewLoanHandler(loanService)
 
+	// Nuevos handlers de laptops.
+	laptopHandler := handler.NewLaptopHandler(laptopService)
+
+	laptopLoanHandler := handler.NewLaptopLoanHandler(
+		laptopLoanService,
+	)
+
 	router := gin.Default()
 
-	// CORS abierto para que el frontend en React (otro puerto/origen) pueda consumir la API.
+	// Configuración CORS para el frontend.
 	router.Use(cors.New(cors.Config{
 		AllowAllOrigins:  true,
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
@@ -57,10 +81,23 @@ func main() {
 		AllowCredentials: false,
 	}))
 
-	handler.SetupRoutes(router, authHandler, bookHandler, loanHandler, cfg.JWTSecret)
+	// Registro de las rutas existentes y nuevas.
+	handler.SetupRoutes(
+		router,
+		authHandler,
+		bookHandler,
+		loanHandler,
+		laptopHandler,
+		laptopLoanHandler,
+		cfg.JWTSecret,
+	)
 
 	log.Printf("Servidor escuchando en el puerto %s", cfg.AppPort)
-	log.Printf("Documentación Swagger disponible en http://localhost:%s/swagger/index.html", cfg.AppPort)
+
+	log.Printf(
+		"Documentación Swagger disponible en http://localhost:%s/swagger/index.html",
+		cfg.AppPort,
+	)
 
 	if err := router.Run(":" + cfg.AppPort); err != nil {
 		log.Fatalf("Error al iniciar el servidor: %v", err)
