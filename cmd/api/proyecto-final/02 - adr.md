@@ -20,7 +20,7 @@ Se requiere incorporar una funcionalidad que permita gestionar préstamos de lap
 - Generalizar el módulo de préstamos mediante una entidad de recursos.
 - Utilizar una tabla única de préstamos con un tipo de recurso.
 
-Las alternativas se encuentran detalladas en el [análisis arquitectónico](analisis.md).
+Las alternativas se encuentran detalladas en el [análisis arquitectónico](01%20-%20analisis.md).
 
 ## 3. Decisión
 
@@ -68,6 +68,6 @@ El módulo de préstamos de laptops funciona de manera independiente al módulo 
 
 ## 9. Documentación relacionada
 
-- [Fase 1 — Análisis arquitectónico](analisis.md)
-- [Fase 4 — Verificación](verificacion.md)
-- [Fase 5 — Diagramas](diagramas.md)
+- [Fase 1 — Análisis arquitectónico](01%20-%20analisis.m)
+- [Fase 4 — Verificación](04%20-%20verificacion.md)
+- [Fase 5 — Diagramas](05%20-%20diagramas.md)
